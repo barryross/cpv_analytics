@@ -6,6 +6,12 @@ This Node.js/React app allows users to view cost per view (CPV) by the following
   - CPV by rotation by day
 
 
+# Assumptions
+
+I assume that in a real-world scenario there may be a cron job that would handle such a conversion from .csv to .json - thereby making a .json file available for subsequent requests (such as api calls) to make use of...rather than those requests triggering the conversion 
+
+I also made the assumption that the front-end required essentially no user-friendly information, navigation or custom styling...as the meat of this project is more technical in nature
+
 # Technical Overview
 
 ### Backend
