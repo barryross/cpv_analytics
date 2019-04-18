@@ -32,6 +32,7 @@ The frontend is a React app that makes use of:
 While a bit overkill for an app of this size, the above libraries were used with the idea of scalability in mind...both in terms of file/folder structure and component re-use, and the use of memoized selectors to assist with caching
 
 # Ideas for future development/refactoring
+- Cleanup/refactoring of the Table headers/columns and review how the data is being mapped/reduced in `selectors/index.js`
 
 - As the size of the .csv data grows, we want to limit the amount of memory that is used to store the data. Some ideas to deal with this are to: 
   - Read the .csv, convert to json and keep it in memory one time and allow multiple requests to `/api/spots` access the same JSON representation of `spots.csv`
