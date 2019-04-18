@@ -4,6 +4,8 @@ const getRotations = (state) => state.rotations
 const getSpots = (state) => state.spots
 var format = 'hh:mm A'
 
+
+// Distills the data into exactly what we want to feed into the table 
 export const combinedRotationsAndSpots = createSelector(
   [ getRotations, getSpots ],
   (rotations, spots) => {

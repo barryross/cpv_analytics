@@ -1,4 +1,3 @@
-import moment from 'moment'
 import { GET_ROTATIONS_SUCCESS } from '../actionTypes'
 
 export default (state = [], action) => {
