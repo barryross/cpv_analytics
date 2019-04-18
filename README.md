@@ -8,9 +8,17 @@ This Node.js/React app allows users to view cost per view (CPV) by the following
 
 # Assumptions
 
+<<<<<<< HEAD
 I assume that in a real-world scenario there may be a cron job that would handle such a conversion from .csv to .json - thereby making a .json file available for subsequent requests (such as api calls) to make use of...rather than those requests triggering the conversion 
+=======
+- the primary goal is to "Join" the data together so we display the rotation name for a particular piece of data.  We could further distill the information by displaying the average CPV by  Creative/Date/Rotation (which I've done in the second Table)
 
-I also made the assumption that the front-end required essentially no user-friendly information, navigation or custom styling...as the meat of this project is more technical in nature
+- we would likely NOT want to include the .csv in source control and/or make it publicly accessible 
+>>>>>>> cf4e93a89c7777c98424ae846c31a37632e902b7
+
+- in a real-world scenario there may be a cron job that would handle such a conversion from .csv to .json - thereby making a .json file available for subsequent requests (such as api calls) to make use of...rather than those requests triggering the conversion 
+
+- the front-end required essentially no user-friendly information, navigation or custom styling...as the meat of this project is more technical in nature
 
 # Technical Overview
 
@@ -30,6 +38,7 @@ The frontend is a React app that makes use of:
 While a bit overkill for an app of this size, the above libraries were used with the idea of scalability in mind...both in terms of file/folder structure and component re-use, and the use of memoized selectors to assist with caching
 
 # Ideas for future development/refactoring
+- Cleanup/refactoring of the Table headers/columns and review how the data is being mapped/reduced in `selectors/index.js`
 - As the size of the .csv data grows, we want to limit the amount of memory that is used to store the data. Some ideas to deal with this are to: 
   - Read the .csv, convert to json and keep it in memory one time and allow multiple requests to `/api/spots` to access the same JSON representation of `spots.csv`
 
