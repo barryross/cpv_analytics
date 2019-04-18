@@ -4,14 +4,13 @@ import Api from '../services/api'
 
  function* workerGetSpots(data){
 	yield put({ type: LOADING, data:true}); 
-	const response = yield call(Api.fetchSpots)
-	console.log("RESPONSE", response)
-	try{
-		yield put({ type: GET_SPOTS_SUCCESS}); // Works for all three different rovers
-	}catch(error){
-		yield put({ type: GET_SPOTS_ERROR, error}); // Works for all three different rovers
+		try {
+			const response = yield call(Api.fetchSpots)
+			yield put({ type: GET_SPOTS_SUCCESS, data:response.data.spots}); 
+		}catch(err){
+			yield put({ type: GET_SPOTS_ERROR, err}); 
 
-	}
+		}
 	yield put({ type: LOADING, data:false});
 
 }

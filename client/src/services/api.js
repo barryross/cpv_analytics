@@ -5,7 +5,7 @@ const fetchSpots = () => {
 };
 
 const fetchRotations = () => {
-  return httpClient.get('/api/spots')
+  return httpClient.get('/api/rotations')
 };
 
 export default {

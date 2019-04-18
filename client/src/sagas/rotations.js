@@ -2,15 +2,16 @@ import {LOADING, GET_ROTATIONS, GET_ROTATIONS_SUCCESS, GET_ROTATIONS_ERROR} from
 import { put, takeEvery, call } from 'redux-saga/effects'
 import Api from '../services/api'
 
- function* workerGetRotations(data){
-	yield put({ type: LOADING, data:true}); 
-	const response = yield call(Api.fetchRotations)
-	try{
-		yield put({ type: GET_ROTATIONS_SUCCESS}); 
-	}catch(error){
-		yield put({ type: GET_ROTATIONS_ERROR, error}); 
 
-	}
+function* workerGetRotations(){
+	yield put({ type: LOADING, data:true}); 
+		try {
+			const response = yield call(Api.fetchRotations)
+			yield put({ type: GET_ROTATIONS_SUCCESS, data:response.data.rotations}); 
+		}catch(err){
+			yield put({ type: GET_ROTATIONS_ERROR, err});
+
+		}
 	yield put({ type: LOADING, data:false});
 
 }
