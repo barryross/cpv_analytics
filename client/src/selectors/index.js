@@ -11,10 +11,10 @@ export const combinedRotationsAndSpots = createSelector(
   [ getRotations, getSpots ],
   (rotations, spots) => {
 		return spots.map(spot => {
-			let rotation = rotations.filter(rotation => {
-				return moment(spot.Time, format).isBetween(moment(rotation.Start, format), moment(rotation.End, format))
+			let rotation = rotations.filter(rotation => { // Assigns the appropriate Rotation Name to the Spot object
+				return moment(spot.Time, format)
+				.isBetween(moment(rotation.Start, format), moment(rotation.End, format))
 			})
-			// console.log("rotation found", rotation)
 			spot.Rotation = rotation[0] ? rotation[0].Name : null
 			spot.CPV = (spot.Spend/spot.Views).toFixed(2)	
 			return spot
@@ -22,12 +22,14 @@ export const combinedRotationsAndSpots = createSelector(
   }
 )
 
+//This is currently used for the second table
 export const combinedRotationsAndSpotsReduced = createSelector(
   [ getRotations, getSpots ],
   (rotations, spots) => {
 		let initial =  spots.map(spot => {
-			let rotation = rotations.filter(rotation => {
-				return moment(spot.Time, format).isBetween(moment(rotation.Start, format), moment(rotation.End, format))
+			let rotation = rotations.filter(rotation => { // Assigns the appropriate Rotation Name to the Spot object
+				return moment(spot.Time, format)
+				.isBetween(moment(rotation.Start, format), moment(rotation.End, format))
 			})
 			spot.Rotation = rotation[0] ? rotation[0].Name : null
 			spot.Spend = parseFloat(spot.Spend)
@@ -35,12 +37,11 @@ export const combinedRotationsAndSpotsReduced = createSelector(
 			return spot
 		})
 
-		if(initial.length){
-	
+		if(initial.length){ //Groups spots with similar Creative, Date & Rotation
 			let groups = _.groupBy(initial, function(item) {
 				return `${item.Creative} - ${item.Date} - ${item.Rotation}`;
 			});
-
+			//For each group, we reduce the Views and Spend into single summed values
 			let reduced = _.map(groups, (group) => {
 				return _.reduce(group, (a,b)=>{
 					return {...b, 
@@ -50,7 +51,7 @@ export const combinedRotationsAndSpotsReduced = createSelector(
 				})
 
 			})
-			console.log("reduced", reduced)
+			//We map through the groups, which now contain the reduced values and generate the CPV value
 			return reduced.map(obj => {
 				obj.CPV = (obj.Spend/obj.Views).toFixed(2)
 				return obj
